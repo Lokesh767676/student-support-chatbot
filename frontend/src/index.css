@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  body {
+    @apply bg-gray-50 text-gray-900;
+    font-family: 'Source Sans 3', ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .chat-bubble {
+    @apply max-w-xs lg:max-w-md px-4 py-2 rounded-2xl;
+  }
+  
+  .chat-bubble-user {
+    @apply bg-primary-500 text-white ml-auto;
+  }
+  
+  .chat-bubble-bot {
+    @apply bg-gray-100 text-gray-800;
+  }
+  
+  .module-card {
+    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 cursor-pointer;
+  }
+  
+  .gradient-bg {
+    @apply bg-gradient-to-br from-primary-400 to-primary-600;
+  }
+  
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Fraunces', ui-serif, Georgia, serif;
+  }
+
+  .auth-grid {
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0) 35%),
+      radial-gradient(circle at 80% 10%, rgba(56, 189, 248, 0.15) 0, rgba(56, 189, 248, 0) 40%),
+      radial-gradient(circle at 80% 80%, rgba(251, 113, 133, 0.18) 0, rgba(251, 113, 133, 0) 45%);
+  }
+
+  @keyframes floatSlow {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .float-slow {
+    animation: floatSlow 10s ease-in-out infinite;
+  }
+
+  .fade-up {
+    animation: fadeUp 0.7s ease-out both;
+  }
+}
