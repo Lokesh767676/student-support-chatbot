@@ -24,7 +24,7 @@ interface LayoutProps {
   children: React.ReactNode
 }
 
-const NAVIGATION = [
+const STUDENT_NAVIGATION = [
   { name: 'Home', href: '/', icon: HomeIcon },
   { name: 'Profile', href: '/profile', icon: User },
   { name: 'AI Chatbot', href: '/chat', icon: MessageCircle },
@@ -35,6 +35,17 @@ const NAVIGATION = [
   { name: 'Mental Health', href: '/mental-health', icon: Heart },
   { name: 'Social Media', href: '/social-media', icon: Share2 },
   { name: 'AI FAQs', href: '/ai-faqs', icon: HelpCircle }
+]
+
+const ADMIN_NAVIGATION = [
+  { name: 'Dashboard', href: '/admin', icon: HomeIcon },
+  { name: 'Admission Module', href: '/admin/admission', icon: GraduationCap },
+  { name: 'Academic Module', href: '/admin/academic', icon: BookOpen },
+  { name: 'Financial Module', href: '/admin/financial', icon: DollarSign },
+  { name: 'Campus Module', href: '/admin/campus', icon: Building },
+  { name: 'Mental Health Module', href: '/admin/mental-health', icon: Heart },
+  { name: 'Social Media Module', href: '/admin/social-media', icon: Share2 },
+  { name: 'AI FAQs Module', href: '/admin/ai-faqs', icon: HelpCircle }
 ]
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
@@ -60,7 +71,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     navigate('/login')
   }
 
-  const isActive = (path: string) => location.pathname === path
+  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(`${path}/`)
+  const navigation = user?.role === 'admin' ? ADMIN_NAVIGATION : STUDENT_NAVIGATION
 
   return (
     <div className="h-screen bg-gray-50 flex overflow-hidden">
@@ -92,7 +104,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         <nav className="mt-6 px-4">
           <div className="space-y-2">
-            {NAVIGATION.map((item) => {
+            {navigation.map((item) => {
               const Icon = item.icon
               return (
                 <Link
@@ -132,7 +144,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="flex items-center space-x-4 flex-1">
               <div className="hidden sm:block">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  {NAVIGATION.find(item => isActive(item.href))?.name || 'AI Student Support System'}
+                  {navigation.find(item => isActive(item.href))?.name || 'AI Student Support System'}
                 </h2>
               </div>
             </div>

@@ -74,8 +74,8 @@ const Login: React.FC = () => {
         localStorage.setItem('token', data.token)
         localStorage.setItem('user', JSON.stringify(data.user))
         
-        // Redirect to home page
-        navigate('/')
+        // Redirect by role
+        navigate(data.user?.role === 'admin' ? '/admin' : '/')
       } else {
         setError(data.error || 'Login failed. Please check your credentials.')
       }

@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 // Import Routes for Data Storage
@@ -17,6 +18,7 @@ const academicRouter = require('./routes/academic');
 const financialRouter = require('./routes/financial');
 const campusRouter = require('./routes/campus');
 const mentalHealthRouter = require('./routes/mentalHealth');
+const { User } = require('./models/User');
 
 // Initialize Express App
 const app = express();
@@ -55,6 +57,47 @@ app.use('/api/', limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
+const ensureAdminUser = async () => {
+  const isProduction = process.env.NODE_ENV === 'production';
+  const adminId = process.env.ADMIN_ID || (!isProduction ? 'ADMIN01' : null);
+  const adminPassword = process.env.ADMIN_PASSWORD || (!isProduction ? 'Admin@123' : null);
+
+  if (!adminId || !adminPassword) {
+    return;
+  }
+
+  const existingAdmin = await User.findOne({ adminId });
+  if (existingAdmin) {
+    if (String(process.env.ADMIN_FORCE_RESET).toLowerCase() === 'true') {
+      const hashedPassword = await bcrypt.hash(adminPassword, 12);
+      existingAdmin.password = hashedPassword;
+      existingAdmin.role = 'admin';
+      existingAdmin.isActive = true;
+      await existingAdmin.save();
+      console.log(`✅ Admin password reset for: ${adminId}`);
+    }
+    return;
+  }
+
+  const hashedPassword = await bcrypt.hash(adminPassword, 12);
+  const firstName = process.env.ADMIN_FIRST_NAME || 'System';
+  const lastName = process.env.ADMIN_LAST_NAME || 'Admin';
+
+  await User.create({
+    firstName,
+    lastName,
+    password: hashedPassword,
+    adminId,
+    role: 'admin',
+    program: 'Computer Science',
+    year: 1,
+    gpa: 0.0,
+    isActive: true
+  });
+
+  console.log(`✅ Admin user seeded: ${adminId}`);
+};
+
 // ========================================
 // 🗄️ DATABASE CONNECTION
 // ========================================
@@ -67,6 +110,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/student-s
 })
 .then(() => {
   console.log('✅ MongoDB connected successfully');
+  ensureAdminUser();
 })
 .catch((err) => {
   console.error('❌ MongoDB connection error:', err);
