@@ -10,6 +10,7 @@ import AcademicSupport from './pages/modules/AcademicSupport'
 import FinancialAssistance from './pages/modules/FinancialAssistance'
 import CampusSupport from './pages/modules/CampusSupport'
 import MentalHealthSupport from './pages/modules/MentalHealthSupport'
+import CareerSupport from './pages/modules/CareerSupport'
 import SocialMediaIntegration from './components/SocialMediaIntegration'
 import AIGeneratedFAQSystem from './components/AIGeneratedFAQSystem'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -88,6 +89,7 @@ function App() {
             <Route path="/financial" element={<FinancialAssistance />} />
             <Route path="/campus" element={<CampusSupport />} />
             <Route path="/mental-health" element={<MentalHealthSupport />} />
+            <Route path="/career" element={<CareerSupport />} />
             <Route path="/social-media" element={<SocialMediaIntegration />} />
             <Route path="/ai-faqs" element={<AIGeneratedFAQSystem />} />
           </Route>

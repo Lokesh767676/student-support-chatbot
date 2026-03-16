@@ -91,7 +91,10 @@ const getStandardResponse = (text) => {
   if (text.includes('mental') || text.includes('counseling') || text.includes('stress') || text.includes('health')) {
     return 'For mental health support, I can connect you with counseling services, stress management resources, and support groups. How can I support your well-being?';
   }
-  return 'I\'m here to help with admissions, academics, financial aid, campus services, and mental health support. Could you please tell me more about what you need assistance with?';
+  if (text.includes('career') || text.includes('internship') || text.includes('placement') || text.includes('resume') || text.includes('interview')) {
+    return 'For career support, I can help with internships, resume reviews, mock interviews, and career events. What would you like to focus on?';
+  }
+  return 'I\'m here to help with admissions, academics, financial aid, campus services, mental health support, and career guidance. Could you please tell me more about what you need assistance with?';
 };
 
 // ========================================

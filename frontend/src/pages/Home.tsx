@@ -7,6 +7,7 @@ import {
   DollarSign, 
   Building, 
   Heart,
+  Briefcase,
   ArrowRight,
   Brain,
   Mic,
@@ -55,6 +56,14 @@ const MODULES = [
     href: '/mental-health',
     color: 'bg-red-500',
     features: ['Counseling Appointments', 'Stress Management', 'Mental Health Resources']
+  },
+  {
+    title: 'Career Support',
+    description: 'Internship discovery, resume reviews, and mock interviews',
+    icon: Briefcase,
+    href: '/career',
+    color: 'bg-indigo-500',
+    features: ['Internship Discovery', 'Resume Reviews', 'Mock Interviews']
   }
 ]
 

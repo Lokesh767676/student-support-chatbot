@@ -18,6 +18,7 @@ const academicRouter = require('./routes/academic');
 const financialRouter = require('./routes/financial');
 const campusRouter = require('./routes/campus');
 const mentalHealthRouter = require('./routes/mentalHealth');
+const careerRouter = require('./routes/career');
 const { User } = require('./models/User');
 
 // Initialize Express App
@@ -139,6 +140,7 @@ app.use('/api/academic', academicRouter);
 app.use('/api/financial', financialRouter);
 app.use('/api/campus', campusRouter);
 app.use('/api/mental-health', mentalHealthRouter);
+app.use('/api/career', careerRouter);
 
 app.get('/api/health', (req, res) => {
   res.status(200).json({

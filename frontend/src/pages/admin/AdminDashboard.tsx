@@ -7,10 +7,10 @@ import {
   DollarSign,
   Building,
   Heart,
+  Briefcase,
   Share2,
   HelpCircle,
-  Users,
-  Activity
+  Users
 } from 'lucide-react'
 
 const ADMIN_MODULES = [
@@ -50,6 +50,13 @@ const ADMIN_MODULES = [
     accent: 'bg-rose-500'
   },
   {
+    id: 'career',
+    title: 'Career Support',
+    description: 'Track resume reviews, mock interviews, and internship pipelines.',
+    icon: Briefcase,
+    accent: 'bg-indigo-500'
+  },
+  {
     id: 'social-media',
     title: 'Social Media',
     description: 'Schedule announcements and moderate student-facing posts.',
@@ -85,33 +92,6 @@ const AdminDashboard: React.FC = () => {
               <ClipboardCheck className="h-4 w-4" />
               Review pending approvals
             </button>
-          </div>
-        </div>
-
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-3 text-gray-600">
-              <Activity className="h-5 w-5 text-emerald-500" />
-              <span className="text-sm font-medium">Live requests</span>
-            </div>
-            <p className="mt-3 text-2xl font-semibold text-gray-900">128</p>
-            <p className="mt-1 text-xs text-gray-500">Awaiting admin review across modules</p>
-          </div>
-          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-3 text-gray-600">
-              <Users className="h-5 w-5 text-blue-500" />
-              <span className="text-sm font-medium">Active students</span>
-            </div>
-            <p className="mt-3 text-2xl font-semibold text-gray-900">2,410</p>
-            <p className="mt-1 text-xs text-gray-500">Currently using the portal</p>
-          </div>
-          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-3 text-gray-600">
-              <ClipboardCheck className="h-5 w-5 text-amber-500" />
-              <span className="text-sm font-medium">Approvals today</span>
-            </div>
-            <p className="mt-3 text-2xl font-semibold text-gray-900">46</p>
-            <p className="mt-1 text-xs text-gray-500">Completed in the last 24 hours</p>
           </div>
         </div>
 

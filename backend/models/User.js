@@ -334,6 +334,36 @@ const mentalHealthResourceAccessSchema = new mongoose.Schema({
 });
 
 // ========================================
+// 💼 CAREER SUPPORT MODELS
+// ========================================
+// Purpose: Store resume reviews and mock interview requests
+const careerResumeReviewSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  resumeTitle: { type: String, required: true, trim: true },
+  targetRole: { type: String, required: true, trim: true },
+  resumeLink: { type: String, trim: true },
+  fullName: { type: String, required: true, trim: true },
+  studentId: { type: String, required: true, trim: true },
+  email: { type: String, required: true, trim: true },
+  notes: { type: String, trim: true },
+  status: { type: String, enum: ['submitted', 'reviewing', 'completed'], default: 'submitted' },
+  submittedAt: { type: Date, default: Date.now }
+});
+
+const careerMockInterviewSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  role: { type: String, required: true, trim: true },
+  preferredDate: { type: String, required: true, trim: true },
+  experienceLevel: { type: String, enum: ['beginner', 'intermediate', 'advanced'], default: 'intermediate' },
+  fullName: { type: String, required: true, trim: true },
+  studentId: { type: String, required: true, trim: true },
+  email: { type: String, required: true, trim: true },
+  notes: { type: String, trim: true },
+  status: { type: String, enum: ['submitted', 'scheduled', 'completed', 'cancelled'], default: 'submitted' },
+  submittedAt: { type: Date, default: Date.now }
+});
+
+// ========================================
 // 🏭 INDEXES FOR PERFORMANCE
 // ========================================
 // Indexes improve database query performance
@@ -354,6 +384,8 @@ campusMapRequestSchema.index({ userId: 1, submittedAt: -1 });
 mentalHealthAppointmentSchema.index({ userId: 1, submittedAt: -1 });
 mentalHealthGroupJoinSchema.index({ userId: 1, submittedAt: -1 });
 mentalHealthResourceAccessSchema.index({ userId: 1, submittedAt: -1 });
+careerResumeReviewSchema.index({ userId: 1, submittedAt: -1 });
+careerMockInterviewSchema.index({ userId: 1, submittedAt: -1 });
 
 // ========================================
 // 📦 EXPORT MODELS
@@ -372,6 +404,8 @@ const CampusMapRequest = mongoose.model('CampusMapRequest', campusMapRequestSche
 const MentalHealthAppointment = mongoose.model('MentalHealthAppointment', mentalHealthAppointmentSchema);
 const MentalHealthGroupJoin = mongoose.model('MentalHealthGroupJoin', mentalHealthGroupJoinSchema);
 const MentalHealthResourceAccess = mongoose.model('MentalHealthResourceAccess', mentalHealthResourceAccessSchema);
+const CareerResumeReviewRequest = mongoose.model('CareerResumeReviewRequest', careerResumeReviewSchema);
+const CareerMockInterviewRequest = mongoose.model('CareerMockInterviewRequest', careerMockInterviewSchema);
 
 module.exports = {
   User,
@@ -387,5 +421,7 @@ module.exports = {
   CampusMapRequest,
   MentalHealthAppointment,
   MentalHealthGroupJoin,
-  MentalHealthResourceAccess
+  MentalHealthResourceAccess,
+  CareerResumeReviewRequest,
+  CareerMockInterviewRequest
 };

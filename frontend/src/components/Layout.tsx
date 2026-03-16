@@ -12,6 +12,7 @@ import {
   DollarSign,
   Building,
   Heart,
+  Briefcase,
   Share2,
   HelpCircle,
   Home as HomeIcon,
@@ -33,6 +34,7 @@ const STUDENT_NAVIGATION = [
   { name: 'Financial', href: '/financial', icon: DollarSign },
   { name: 'Campus', href: '/campus', icon: Building },
   { name: 'Mental Health', href: '/mental-health', icon: Heart },
+  { name: 'Career', href: '/career', icon: Briefcase },
   { name: 'Social Media', href: '/social-media', icon: Share2 },
   { name: 'AI FAQs', href: '/ai-faqs', icon: HelpCircle }
 ]
@@ -44,6 +46,7 @@ const ADMIN_NAVIGATION = [
   { name: 'Financial Module', href: '/admin/financial', icon: DollarSign },
   { name: 'Campus Module', href: '/admin/campus', icon: Building },
   { name: 'Mental Health Module', href: '/admin/mental-health', icon: Heart },
+  { name: 'Career Module', href: '/admin/career', icon: Briefcase },
   { name: 'Social Media Module', href: '/admin/social-media', icon: Share2 },
   { name: 'AI FAQs Module', href: '/admin/ai-faqs', icon: HelpCircle }
 ]

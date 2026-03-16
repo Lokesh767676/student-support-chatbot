@@ -6,6 +6,7 @@ import {
   DollarSign,
   Building,
   Heart,
+  Briefcase,
   Share2,
   HelpCircle,
   ClipboardCheck,
@@ -38,6 +39,11 @@ const MODULE_CONFIG: Record<string, { title: string; description: string; icon: 
     title: 'Mental Health Module',
     description: 'Handle counseling appointments and wellbeing resource access.',
     icon: Heart
+  },
+  career: {
+    title: 'Career Module',
+    description: 'Review resume feedback requests and mock interview bookings.',
+    icon: Briefcase
   },
   'social-media': {
     title: 'Social Media Module',

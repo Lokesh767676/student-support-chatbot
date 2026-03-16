@@ -17,6 +17,7 @@ const academicRouter = require('./routes/academic');
 const financialRouter = require('./routes/financial');
 const campusRouter = require('./routes/campus');
 const mentalHealthRouter = require('./routes/mentalHealth');
+const careerRouter = require('./routes/career');
 
 // Initialize Express App
 const app = express();
@@ -85,6 +86,7 @@ app.use('/api/academic', academicRouter);
 app.use('/api/financial', financialRouter);
 app.use('/api/campus', campusRouter);
 app.use('/api/mental-health', mentalHealthRouter);
+app.use('/api/career', careerRouter);
 
 // ========================================
 // 🛡️ ERROR HANDLING
@@ -152,7 +154,9 @@ app.use('*', (req, res) => {
       '/api/campus/map-requests',
       '/api/mental-health/appointments',
       '/api/mental-health/groups',
-      '/api/mental-health/resources'
+      '/api/mental-health/resources',
+      '/api/career/resume-reviews',
+      '/api/career/mock-interviews'
     ]
   });
 });
