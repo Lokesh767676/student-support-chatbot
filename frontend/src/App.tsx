@@ -15,6 +15,7 @@ import SocialMediaIntegration from './components/SocialMediaIntegration'
 import AIGeneratedFAQSystem from './components/AIGeneratedFAQSystem'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminModule from './pages/admin/AdminModule'
+import AdminModules from './pages/admin/AdminModules'
 
 const getStoredUser = () => {
   try {
@@ -24,6 +25,14 @@ const getStoredUser = () => {
     return null
   }
 }
+
+const resetAuthOnLoad = () => {
+  if (typeof window === 'undefined') return
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
+}
+
+resetAuthOnLoad()
 
 const isAuthenticated = () => Boolean(localStorage.getItem('token'))
 const getRole = () => getStoredUser()?.role
@@ -78,6 +87,7 @@ function App() {
         <Route element={<ProtectedLayout />}>
           <Route element={<RequireRole role="admin" />}>
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/modules" element={<AdminModules />} />
             <Route path="/admin/:moduleId" element={<AdminModule />} />
           </Route>
           <Route element={<RequireRole role="student" />}>

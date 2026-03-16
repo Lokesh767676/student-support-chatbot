@@ -46,6 +46,35 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
+const requireAdmin = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.userId).select('role isActive');
+
+    if (!user || !user.isActive) {
+      return res.status(403).json({
+        error: 'Access denied',
+        message: 'Account inactive'
+      });
+    }
+
+    if (user.role !== 'admin') {
+      return res.status(403).json({
+        error: 'Access denied',
+        message: 'Admin access required'
+      });
+    }
+
+    req.user = user;
+    next();
+  } catch (error) {
+    console.error('Admin check error:', error);
+    res.status(500).json({
+      error: 'Authorization failed',
+      message: 'Server error'
+    });
+  }
+};
+
 // ========================================
 // 📝 VALIDATION MIDDLEWARE
 // ========================================
@@ -326,4 +355,4 @@ router.post('/logout', authenticateToken, (req, res) => {
   });
 });
 
-module.exports = { router, authenticateToken };
+module.exports = { router, authenticateToken, requireAdmin };

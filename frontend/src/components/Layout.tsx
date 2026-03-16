@@ -41,6 +41,7 @@ const STUDENT_NAVIGATION = [
 
 const ADMIN_NAVIGATION = [
   { name: 'Dashboard', href: '/admin', icon: HomeIcon },
+  { name: 'Modules', href: '/admin/modules', icon: BookOpen },
   { name: 'Admission Module', href: '/admin/admission', icon: GraduationCap },
   { name: 'Academic Module', href: '/admin/academic', icon: BookOpen },
   { name: 'Financial Module', href: '/admin/financial', icon: DollarSign },

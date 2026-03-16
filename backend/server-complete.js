@@ -12,6 +12,7 @@ require('dotenv').config();
 // Import Routes
 const { router: authRouter, authenticateToken } = require('./routes/auth');
 const chatRouter = require('./routes/chat');
+const adminRouter = require('./routes/admin');
 const admissionsRouter = require('./routes/admissions');
 const academicRouter = require('./routes/academic');
 const financialRouter = require('./routes/financial');
@@ -80,6 +81,7 @@ app.get('/api/health', (req, res) => {
 
 // API Routes
 app.use('/api/auth', authRouter);
+app.use('/api/admin', adminRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/admissions', admissionsRouter);
 app.use('/api/academic', academicRouter);

@@ -13,6 +13,7 @@ require('dotenv').config();
 // Import Routes for Data Storage
 const { router: authRouter, authenticateToken } = require('./routes/auth');
 const chatRouter = require('./routes/chat');
+const adminRouter = require('./routes/admin');
 const admissionsRouter = require('./routes/admissions');
 const academicRouter = require('./routes/academic');
 const financialRouter = require('./routes/financial');
@@ -134,6 +135,7 @@ app.listen(PORT, () => {
 
 // API Routes for Data Storage
 app.use('/api/auth', authRouter);
+app.use('/api/admin', adminRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/admissions', admissionsRouter);
 app.use('/api/academic', academicRouter);

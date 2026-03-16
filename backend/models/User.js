@@ -82,6 +82,31 @@ const chatMessageSchema = new mongoose.Schema({
 });
 
 // ========================================
+// 🧭 MODULE CONFIG MODEL
+// ========================================
+// Purpose: Admin-managed module settings and announcements
+const moduleSchema = new mongoose.Schema({
+  moduleId: { type: String, required: true, unique: true },
+  title: { type: String, required: true, trim: true },
+  description: { type: String, required: true, trim: true },
+  isActive: { type: Boolean, default: true },
+  visibility: {
+    type: String,
+    enum: ['students', 'admins', 'both'],
+    default: 'both'
+  },
+  announcements: [
+    {
+      title: { type: String, required: true, trim: true },
+      message: { type: String, required: true, trim: true },
+      createdAt: { type: Date, default: Date.now },
+      createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    }
+  ],
+  updatedAt: { type: Date, default: Date.now }
+});
+
+// ========================================
 // ❓ FAQ MODEL
 // ========================================
 // Purpose: AI-generated frequently asked questions
@@ -293,6 +318,7 @@ const campusMapRequestSchema = new mongoose.Schema({
   query: { type: String, trim: true },
   fromLocation: { type: String, trim: true },
   toLocation: { type: String, trim: true },
+  status: { type: String, enum: ['submitted', 'completed', 'rejected'], default: 'submitted' },
   submittedAt: { type: Date, default: Date.now }
 });
 
@@ -330,6 +356,7 @@ const mentalHealthResourceAccessSchema = new mongoose.Schema({
   resourceTitle: { type: String, required: true },
   fullName: { type: String, required: true, trim: true },
   email: { type: String, required: true, trim: true },
+  status: { type: String, enum: ['submitted', 'approved', 'rejected'], default: 'submitted' },
   submittedAt: { type: Date, default: Date.now }
 });
 
@@ -372,6 +399,7 @@ chatMessageSchema.index({ userId: 1, timestamp: -1 });
 chatMessageSchema.index({ category: 1 });
 faqSchema.index({ category: 1 });
 faqSchema.index({ keywords: 1 });
+moduleSchema.index({ moduleId: 1 });
 socialPostSchema.index({ userId: 1, createdAt: -1 });
 supportTicketSchema.index({ userId: 1, status: 1 });
 supportTicketSchema.index({ category: 1, priority: 1 });
@@ -392,6 +420,7 @@ careerMockInterviewSchema.index({ userId: 1, submittedAt: -1 });
 // ========================================
 const User = mongoose.model('User', userSchema);
 const ChatMessage = mongoose.model('ChatMessage', chatMessageSchema);
+const Module = mongoose.model('Module', moduleSchema);
 const FAQ = mongoose.model('FAQ', faqSchema);
 const SocialPost = mongoose.model('SocialPost', socialPostSchema);
 const SupportTicket = mongoose.model('SupportTicket', supportTicketSchema);
@@ -410,6 +439,7 @@ const CareerMockInterviewRequest = mongoose.model('CareerMockInterviewRequest', 
 module.exports = {
   User,
   ChatMessage,
+  Module,
   FAQ,
   SocialPost,
   SupportTicket,
